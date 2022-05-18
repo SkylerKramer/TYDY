@@ -1,0 +1,76 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Image Processing Parameters",
+    "description": "These are the paramters to use for bulk image analysis.",
+    "type": "object",
+    "properties": {
+        "compression": {
+            "description": "This is the width to which images are scaled (while maintaining the aspect ratio). Smaller values speed up image processing but may result in information loss.",
+            "type": "integer",
+            "minimum": 1000,
+            "maximum": 3000
+        },
+        "whichChannel": {
+            "description": "This is the image channel to extract: gray, red, blue, green.",
+            "type": "string",
+            "enum": ["gray", "red", "blue", "green"]
+        },
+        "invert": {
+            "description": "This Boolean value determines if images should be inverted.",
+            "type": "boolean"
+        },
+        "threshold_width": {
+            "description": "This is the half-width of the moving rectangular window used for adaptive linear thresholding.",
+            "type": "integer",
+            "minimum": 3,
+            "maximum": 151
+        },
+        "threshold_height": {
+            "description": "This is the half-height of the moving rectangular window used for adaptive linear thresholding.",
+            "type": "integer",
+            "minimum": 3,
+            "maximum": 151
+        },
+        "offset": {
+            "description": "This is the acceptable offset from the threshold determined by adaptive linear thresholding.",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 0.5
+        },
+        "brush_size": {
+            "description": "This is the size of the disc-shaped brush kernel used for morphological operations (erosion followed by dilation).",
+            "type": "integer",
+            "minimum": 3,
+            "maximum": 21
+        },
+        "watershed_tolerance": {
+            "description": "This is the minimum object height in pixel intensity between highest point and point that touches another object.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 21
+        },
+        "watershed_ext": {
+            "description": "This is the pixel radius used to detect neighboring objects.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 21
+        },
+        "minDist": {
+            "description": "Objects with nearest neighbor distances (NNDs) less than this threshold are merged. This is the minimum distance two objects must be from one another to be considered separate entities.",
+            "type": "integer",
+            "minimum": 2
+        },
+        "sizeFilt": {
+            "description": "Objects smaller than this threshold are likely contamination and will be omitted.",
+            "type": "integer",
+            "minimum": 10,
+            "maximum": 1000
+        },
+        "whichChannel_colorDetection": {
+            "description": "This is the image channel to use for color extraction: gray, red, blue, green.",
+            "type": "string",
+            "enum": ["gray", "red", "blue", "green"]
+        }
+    },
+    "required": ["compression", "whichChannel", "invert", "threshold_width", "threshold_height", "offset", "brush_size", "watershed_tolerance", "watershed_ext", "minDist", "sizeFilt", "whichChannel_colorDetection"]
+}
