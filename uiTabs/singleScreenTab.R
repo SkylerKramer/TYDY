@@ -16,14 +16,14 @@ singleScreenTab <- tabPanel(
       # screen upload
       fileInput(
         "ssInput_screen", label = strong("Upload single screen:"),
-        multiple = FALSE, placeholder = "XLSX or CSV file",
+        multiple = FALSE, placeholder = "CSV file",
         accept = c(".csv")
       ),
       
       # library upload
       fileInput(
         "ssInput_library", label = strong("Upload library:"),
-        multiple = FALSE, placeholder = "XLSX or CSV file",
+        multiple = FALSE, placeholder = "CSV file",
         accept = c(".csv")
       ),
       
