@@ -161,7 +161,7 @@ blobGroups <- function(centroidVector = NULL, minDist = 20, groupType = "column"
   return(lineGroups)
 }
 
-## This function is a wrapper function for blobGroups(.); it also includes outlier removal and a small plot
+## This function is a wrapper function for blobGroups(.)
 blobSort <- function(blobs_nn_merge = NULL, minDist = 20){
   # get column and row groupings
   blobs_nn_merge$colGroups <- blobGroups(centroidVector = blobs_nn_merge$xcent, minDist = minDist, groupType = "column")
@@ -253,11 +253,11 @@ blobColors <- function(imgPath = NULL, compression = "1500", whichChannel = "gre
       
       # crop colony
       img_crop <- img[xrange,yrange]
-      img_crop[img_crop > EBImage::otsu(img_crop)] <- EBImage::otsu(img_crop)
       
       # get pixel value corresponding to the largest peak of the kernel density estimate
       d <- density(img_crop)
       pixelPeaks <- c(pixelPeaks, d$x[which.max(d$y)])
+      # pixelPeaks <- c(pixelPeaks, mean(img_crop))
     } else{
       # fill with NA
       pixelPeaks <- c(pixelPeaks, NA)
