@@ -38,7 +38,7 @@ singleScreen_relationshipPlot <- function(ssDF = NULL){
     ggplot2::ggplot(ssDF, ggplot2::aes(Size, Color, colour = Color, size = Size)) +
       ggplot2::geom_point() +
       ggplot2::scale_color_gradientn(colours = rev(RColorBrewer::brewer.pal(n = 9, name = "Reds"))) +
-      ggplot2::labs(x = "Size", y = "Color") +
+      ggplot2::labs(x = "Size", y = "Color", title = "Size vs Color") +
       ggplot2::theme_bw()
   ) %>% plotly::ggplotly()
   

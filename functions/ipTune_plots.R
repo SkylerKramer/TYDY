@@ -13,7 +13,7 @@ blobPlot_nn <- function(blobs_nn = NULL){
       x = "X-Centroid", y = "Y-Centroid",
       colour = "Area",
       size = "Nearest\nNeighbor\nDistance", shape = "Distance\nCategory",
-      title = "Watershed-Detected Blobs"
+      title = "Watershed-Detected Objects"
     ) +
     ggplot2::coord_equal() +
     ggplot2::theme_classic()
