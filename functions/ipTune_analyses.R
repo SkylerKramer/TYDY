@@ -126,7 +126,7 @@ blobGroups <- function(centroidVector = NULL, minDist = 20, groupType = "column"
   # sort by centroid and get distance matrix
   sort_distMat <- dist(centroidDF$centroidVector) %>% as.matrix()
   
-  # keep creating groups until you have 24
+  # keep creating groups until you run out of columns in the distance matrix
   i <- 1
   while(ncol(sort_distMat) != 0){
     # all blobs close to the one in column 1 (< minDist pixels away) are added to the same column
@@ -135,6 +135,7 @@ blobGroups <- function(centroidVector = NULL, minDist = 20, groupType = "column"
     # check if blob belongs to any column
     # if(length(centroidGroup) != 0){
     if(length(centroidGroup) > 3){
+      
       # label the blobs with the column number
       centroidDF[centroidGroup, "lineGroup"] <- paste0(
         ifelse(groupType == "column", "c", "r"),
@@ -255,9 +256,11 @@ blobColors <- function(imgPath = NULL, compression = "1500", whichChannel = "gre
       img_crop <- img[xrange,yrange]
       
       # get pixel value corresponding to the largest peak of the kernel density estimate
-      d <- density(img_crop)
-      pixelPeaks <- c(pixelPeaks, d$x[which.max(d$y)])
-      # pixelPeaks <- c(pixelPeaks, mean(img_crop))
+      # d <- density(img_crop)
+      # pixelPeaks <- c(pixelPeaks, d$x[which.max(d$y)])
+      
+      # get average pixel intensity from cropped image
+      pixelPeaks <- c(pixelPeaks, mean(img_crop))
     } else{
       # fill with NA
       pixelPeaks <- c(pixelPeaks, NA)
