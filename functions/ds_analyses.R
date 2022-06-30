@@ -28,7 +28,7 @@ dualScreen_processData_sing <- function(ctrlDataPath = NULL, testDataPath = NULL
   librData <- read.csv(librDataPath)
   
   # merge data
-  joinData <- dplyr::inner_join(ctrlData, testData, by = "Coordinate") %>% dplyr::left_join(librData, by = "Coordinate")
+  joinData <- dplyr::inner_join(ctrlData, testData, by = "Coordinate") %>% dplyr::inner_join(librData, by = "Coordinate")
   
   # scale features; subtract and classify coordinates based on feature difference; round and relocate
   normData <- joinData %>%
@@ -56,7 +56,7 @@ dualScreen_processData_sing <- function(ctrlDataPath = NULL, testDataPath = NULL
 dualScreen_processData_quad <- function(dataPath = NULL, libraryPath = NULL, voi = NULL, experiment = NULL){
   
   # read one screen and merge with library
-  screenDF <- read.csv(dataPath) %>% tidyr::drop_na() %>% dplyr::left_join(read.csv(libraryPath), by = "Coordinate")
+  screenDF <- read.csv(dataPath) %>% tidyr::drop_na() %>% dplyr::inner_join(read.csv(libraryPath), by = "Coordinate")
   
   # omit unused columns and sort by Identifier (voi = variable of interest (Size or Color); divide voi by plate-specific median
   screenDF <- screenDF %>%
