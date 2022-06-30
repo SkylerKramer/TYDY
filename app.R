@@ -13,9 +13,12 @@ library(magick)
 library(EBImage)
 library(imager)
 library(jsonlite)
+library(jsonvalidate)
 library(readxl)
 library(dplyr)
 library(ggplot2)
+library(ggridges)
+library(gridExtra)
 library(patchwork)
 library(tibble)
 library(topGO)
@@ -69,7 +72,7 @@ ui <- navbarPage(
   "TYDY",
   
   ## application theme
-  theme = shinythemes::shinytheme("cerulean"),
+  theme = shinythemes::shinytheme("united"),
   
   ## change size of pop-up windows -> CAUSES WARNING ON STARTUP
   tags$head(tags$style(HTML(".modal-lg {width: 75%; height: 75%}"))),
@@ -233,7 +236,7 @@ server <- function(input, output, session) {
   ## post-IP plots: NND point plot, NND density, size density
   ipTune_postIP <- eventReactive(input$ipTune_postIPPlot_start, {
     # set requirement
-    req(ipTune_blobsDetected())
+    # req(ipTune_blobsDetected())
     
     # create plots
     p1 <- blobPlot_nn(blobs_nn = ipTune_blobsDetected())
